@@ -1,6 +1,9 @@
 #include "MainWindow.h"
 #include "./ui_MainWindow.h"
 
+#include <QMessageBox>
+
+#include "Application.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -8,6 +11,16 @@ MainWindow::MainWindow(QWidget *parent)
 	, ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
+
+
+	connect(ui->pushButtonParseAndDraw, &QPushButton::pressed,[this]()
+	{
+		QString error;
+		if (!qApp->parseDataFile(ui->lineEditXmlFilePath->text(), &error))
+		{
+			QMessageBox::critical(this, tr("Parse Error"), error);
+		}
+	});
 }
 
 

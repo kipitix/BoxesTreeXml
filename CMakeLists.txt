@@ -24,22 +24,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Widgets Xml REQUIRED)
+
+file(GLOB HDR *.h)
+file(GLOB SRC *.cpp)
+file(GLOB UI *.ui)
+file(GLOB RCC *.qrc)
+
 
 if(ANDROID)
-  add_library(BoxesTreeXml SHARED
-    main.cpp
-    MainWindow.cpp
-    MainWindow.h
-    MainWindow.ui
-  )
+	add_library(BoxesTreeXml SHARED ${HDR} ${SRC} ${UI} ${RCC})
 else()
-  add_executable(BoxesTreeXml
-    main.cpp
-    MainWindow.cpp
-    MainWindow.h
-    MainWindow.ui
-  )
+	add_executable(BoxesTreeXml ${HDR} ${SRC} ${UI} ${RCC})
 endif()
 
-target_link_libraries(BoxesTreeXml PRIVATE Qt5::Widgets)
+target_link_libraries(BoxesTreeXml PRIVATE Qt5::Widgets Qt5::Xml)

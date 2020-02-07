@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.0, 2020-02-05T08:01:19. -->
+<!-- Written by QtCreator 4.11.0, 2020-02-06T08:36:19. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -328,7 +328,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/alexander.akhmetov/AppData/Local/Temp/QtCreator-glgJln/qtc-cmake-MtHEScux</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/workspace/qt/build-BoxesTreeXml-Desktop_Qt_5_12_3_MinGW_64_bit-Debug</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
