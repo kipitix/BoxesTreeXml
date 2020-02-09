@@ -27,7 +27,7 @@ ApplicationPrivate::~ApplicationPrivate()
 
 
 
-bool ApplicationPrivate::parseDataFile(const QString &filePath, QString *error)
+bool ApplicationPrivate::parseDataFile(const QString &filePath, TreeComposer::ParentPosition parentPosition, QString *error)
 {
 	/* Open File */
 	QFile xmlFile{ filePath };
@@ -60,7 +60,7 @@ bool ApplicationPrivate::parseDataFile(const QString &filePath, QString *error)
 	_treeModelRootItem = QSharedPointer<TreeItem>{ handleDomElement(doc.documentElement()) };
 
 	/* Compose box positions */
-	_treeComposer.composeTree(_treeModelRootItem.data());
+	_treeComposer.composeTree(_treeModelRootItem.data(), parentPosition);
 
 	return true;
 }

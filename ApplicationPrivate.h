@@ -26,7 +26,7 @@ public:
 	ApplicationPrivate();
 	virtual ~ApplicationPrivate();
 
-	bool parseDataFile(const QString &filePath, QString *error);
+	bool parseDataFile(const QString &filePath, TreeComposer::ParentPosition parentPosition, QString *error);
 
 signals:
 

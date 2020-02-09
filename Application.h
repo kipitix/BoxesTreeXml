@@ -2,8 +2,6 @@
 
 #include <QApplication>
 
-#include "TreeItem.h"
-
 class Application;
 #ifdef qApp
 #undef qApp
@@ -12,6 +10,11 @@ class Application;
 
 
 class ApplicationPrivate;
+
+
+#include "TreeItem.h"
+#include "TreeComposer.h"
+
 
 class Application
 	: public QApplication
@@ -22,7 +25,7 @@ public:
 	Application(int &argc, char *argv[]);
 	virtual ~Application();
 
-	bool parseDataFile(const QString &filePath, QString *error);
+	bool parseDataFile(const QString &filePath, TreeComposer::ParentPosition parentPosition, QString *error);
 
 	QSharedPointer<TreeItem> treeModelRootItem() const;
 

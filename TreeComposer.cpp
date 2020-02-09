@@ -18,14 +18,14 @@ TreeComposer::~TreeComposer()
 
 
 
-void TreeComposer::composeTree(TreeItem *item) const
+void TreeComposer::composeTree(TreeItem * item, ParentPosition parentPosition) const
 {
-	composeTreeRecursive(item, 0, 0);
+	composeTreeRecursive(item, 0, 0, parentPosition);
 }
 
 
 
-void TreeComposer::composeTreeRecursive(TreeItem *item, int x, int y) const
+void TreeComposer::composeTreeRecursive(TreeItem *item, int x, int y, ParentPosition parentPosition) const
 {
 	item->setX(x);
 	item->setY(y);
@@ -41,16 +41,16 @@ void TreeComposer::composeTreeRecursive(TreeItem *item, int x, int y) const
 	{
 		if (firstChild)
 		{
-			composeTreeRecursive(childItem, x, y + _boxHeight + _boxVerticalMargin);
-		
+			composeTreeRecursive(childItem, x, y + _boxHeight + _boxVerticalMargin, parentPosition);
+
 			totalChildrenWidth = childItem->widthWithChildren();
 
 			firstChild = false;
 		}
 		else
 		{
-			composeTreeRecursive(childItem, x + totalChildrenWidth + _boxHorizontalMargin, y + _boxHeight + _boxVerticalMargin);
-			
+			composeTreeRecursive(childItem, x + totalChildrenWidth + _boxHorizontalMargin, y + _boxHeight + _boxVerticalMargin, parentPosition);
+
 			totalChildrenWidth += _boxHorizontalMargin + childItem->widthWithChildren();
 		}
 
@@ -65,7 +65,34 @@ void TreeComposer::composeTreeRecursive(TreeItem *item, int x, int y) const
 		item->setWidthWithChildren(totalChildrenWidth);
 	}
 
-	item->setX(item->x() + item->widthWithChildren() / 2);
-
 	item->setHeightWithChildren(item->height() + _boxVerticalMargin + maxChildHeight);
+
+	if (parentPosition == ParentPosition::MiddleChildWidth)
+	{
+		auto x = item->x();
+		const auto childrenList = item->children();
+		const auto childCount = childrenList.size();
+		if (childCount > 0)
+		{
+			if (childCount % 2 == 0) // Even
+			{
+				const auto lastItemIndex = childCount / 2;
+				const auto firstItemIndex = lastItemIndex - 1;
+
+				x = (childrenList[lastItemIndex]->x() + childrenList[firstItemIndex]->x()) / 2;
+			}
+			else // Odd
+			{
+				const auto middleItemIndex = childCount / 2;
+
+				x = childrenList[middleItemIndex]->x();
+			}
+
+			item->setX(x);
+		}
+	}
+	else if (parentPosition == ParentPosition::AverageChildWidth)
+	{
+		item->setX(item->x() + item->widthWithChildren() / 2);
+	}
 }

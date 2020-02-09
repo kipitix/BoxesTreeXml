@@ -4,7 +4,6 @@
 #include "ApplicationPrivate.h"
 
 
-
 /* Application */
 
 Application::Application(int &argc, char *argv[])
@@ -26,9 +25,9 @@ Application::~Application()
 
 
 
-bool Application::parseDataFile(const QString &filePath, QString *error)
+bool Application::parseDataFile(const QString &filePath, TreeComposer::ParentPosition parentPosition, QString *error)
 {
-	return _impl->parseDataFile(filePath, error);
+	return _impl->parseDataFile(filePath, parentPosition, error);
 }
 
 
