@@ -1,4 +1,3 @@
-#include "TreeItem.h"
 #include "TreeComposer.h"
 
 
@@ -42,7 +41,7 @@ void TreeComposer::composeTreeRecursive(TreeItem *item, int x, int y) const
 	{
 		if (firstChild)
 		{
-			composeTreeRecursive(childItem, x, y + _boxVerticalMargin);
+			composeTreeRecursive(childItem, x, y + _boxHeight + _boxVerticalMargin);
 		
 			totalChildrenWidth = childItem->widthWithChildren();
 
@@ -50,7 +49,7 @@ void TreeComposer::composeTreeRecursive(TreeItem *item, int x, int y) const
 		}
 		else
 		{
-			composeTreeRecursive(childItem, x + item->widthWithChildren() + _boxHorizontalMargin, y + _boxVerticalMargin);
+			composeTreeRecursive(childItem, x + totalChildrenWidth + _boxHorizontalMargin, y + _boxHeight + _boxVerticalMargin);
 			
 			totalChildrenWidth += _boxHorizontalMargin + childItem->widthWithChildren();
 		}
@@ -65,6 +64,8 @@ void TreeComposer::composeTreeRecursive(TreeItem *item, int x, int y) const
 	{
 		item->setWidthWithChildren(totalChildrenWidth);
 	}
+
+	item->setX(item->x() + item->widthWithChildren() / 2);
 
 	item->setHeightWithChildren(item->height() + _boxVerticalMargin + maxChildHeight);
 }

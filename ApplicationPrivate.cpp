@@ -8,7 +8,7 @@
 const char *const ATTRIBUTE_TEXT_XML_KEY{ "name" };
 
 const int DEFAULT_WIDTH{ 100 };
-const int DEFAULT_HEIGHT{ 100 };
+const int DEFAULT_HEIGHT{ 50 };
 const int DEFAULT_H_MARGIN{ 50 };
 const int DEFAULT_V_MARGIN{ 50 };
 

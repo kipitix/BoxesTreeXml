@@ -11,10 +11,6 @@ Application::Application(int &argc, char *argv[])
 	: QApplication(argc, argv)
 	, _impl{ new ApplicationPrivate() }
 {
-	//connect(_impl, &ApplicationPrivate::connectionStateChanged, this, &Application::connectionStateChanged);
-	
-//	connect(_impl, &ApplicationPrivate::topicReceived, this, &Application::topicReceived);
-//	connect(_impl, &ApplicationPrivate::responseReceived, this, &Application::responseReceived);
 }
 
 
@@ -33,4 +29,12 @@ Application::~Application()
 bool Application::parseDataFile(const QString &filePath, QString *error)
 {
 	return _impl->parseDataFile(filePath, error);
+}
+
+
+
+
+QSharedPointer<TreeItem> Application::treeModelRootItem() const
+{
+	return _impl->_treeModelRootItem;
 }
